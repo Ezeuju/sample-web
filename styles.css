@@ -85,11 +85,82 @@ button {
 /* Footer */
 footer { text-align: center; padding: 20px; background: #333; color: white; }
 
+/* Hide hamburger by default (Desktop) */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: 0.3s;
+}
+
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-    .navbar { flex-direction: column; }
+  
     .nav-links { margin-top: 15px; }
     .hero { flex-direction: column; text-align: center; }
     .hero-content h1 { font-size: 2rem; }
     .hero-image { margin-top: 30px; }
+}
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Show hamburger on mobile */
+    }
+
+    .nav-links {
+        display: none; /* Hide links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        display: flex; /* Show links when "active" class is added */
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    /* --- Add/Update this in your CSS --- */
+
+/* Style the bars */
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: all 0.3s ease-in-out; /* This makes the movement smooth */
+}
+
+/* ANIMATION LOGIC: When the parent has the .active class... */
+
+/* 1. Rotate the top bar down */
+.navbar.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* 2. Hide the middle bar */
+.navbar.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+/* 3. Rotate the bottom bar up */
+.navbar.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
 }
